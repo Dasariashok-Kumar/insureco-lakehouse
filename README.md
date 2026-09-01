@@ -1,7 +1,7 @@
 # InsureCo Lakehouse — Project
 
 An end-to-end mini insurance data platform built on **Azure Databricks** 
-, demonstrating core Lakehouse patterns: Delta Lake, 
+,demonstrating core Lakehouse patterns: Delta Lake, 
 Structured Streaming, Auto Loader, Medallion Architecture, Delta Live 
 Tables, Data Quality, Job Orchestration, Unity Catalog governance, and 
 Databricks SQL dashboards.
@@ -12,8 +12,7 @@ Databricks SQL dashboards.
 
 **Domain:** Property & Casualty / Health Insurance  
 **Dataset:** Simulated InsureCo data — Customers, Agents, Policies, 
-Premium Payments, Claims, Underwriting Risk (~83,000 rows, generated 
-programmatically with intentional data quality issues for testing)
+Premium Payments, Claims, Underwriting Risk (~83,000 rows)
 
 **Architecture:** Medallion (Bronze → Silver → Gold) on Delta Lake, 
 governed by Unity Catalog, orchestrated via Databricks Jobs.
@@ -52,14 +51,14 @@ insureco-lakehouse/
 
 | Feature | Description | Location |
 |---|---|---|
-| **Delta Lake** | Managed + external tables, ACID transactions, time travel | `day1_lakehouse_basics/` |
-| **Structured Streaming** | Auto Loader incremental ingestion with checkpointing | `day3_streaming_autoloader/` |
-| **Medallion Architecture** | Bronze → Silver → Gold layered processing | `day3_`, `day4_` |
-| **Data Quality** | Quarantine pattern with 5 explicit validation rules | `day4_quality_jobs_sql/Day4_Step1_DataQuality.py` |
-| **Delta Live Tables** | Declarative pipeline with EXPECT constraints | `day4_quality_jobs_sql/Day4_DLT_Pipeline_Source.py` |
-| **Job Orchestration** | 3-task dependency chain with parameters | `day4_quality_jobs_sql/Day4_Task*.py` |
+| **Delta Lake** | Managed + external tables, ACID transactions, time travel | `lakehouse_basics/` |
+| **Structured Streaming** | Auto Loader incremental ingestion with checkpointing | `streaming_autoloader/` |
+| **Medallion Architecture** | Bronze → Silver → Gold layered processing | `streaming_autoloader`, `quality_jobs_sql` |
+| **Data Quality** | Quarantine pattern with 5 explicit validation rules | `quality_jobs_sql/Step1_DataQuality.py` |
+| **Delta Live Tables** | Declarative pipeline with EXPECT constraints | `quality_jobs_sql/DLT_Pipeline_Source.py` |
+| **Job Orchestration** | 3-task dependency chain with parameters | `quality_jobs_sql/Day4_Task*.py` |
 | **Databricks SQL** | Dashboards for Loss Ratio, Fraud Rate, Agent Performance | Screenshots in `docs/` |
-| **Unity Catalog Governance** | 3-level namespace, GRANT/REVOKE, lineage | `day5_governance_git/` |
+| **Unity Catalog Governance** | 3-level namespace, GRANT/REVOKE, lineage | `governance_git/` |
 
 ---
 
@@ -90,7 +89,7 @@ insureco-lakehouse/
 2. Run `00_setup/` to generate sample data
 3. Run `lakehouse_basics/*` to create initial Delta tables
 4. Run `streaming_autoloader/*` to build the streaming Bronze layer
-5. Run `quality_jobs_sql/Day4_Step1_DataQuality.py` for Silver/Gold
+5. Run `quality_jobs_sql/Step1_DataQuality.py` for Silver/Gold
 6. Import the Job JSON pattern from `quality_jobs_sql/` into **Workflows**
 7. Run SQL queries from `quality_jobs_sql/SQL_Queries.sql` in SQL Editor
 
